@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeliverHealth x Vieu — Growth Program</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --pearl: #EEEEEE;
+    --white: #FFFFFF;
+    --ink: #333333;
+    --ink-soft: #555555;
+    --ink-muted: #888888;
+    --accent: #7744FF;
+    --accent-tint: #F0ECFF;
+    --accent-mid: #C4B0FF;
+    --green: #00EC8A;
+    --yellow: #FFE299;
+    --red: #FF5363;
+    --card-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(119,68,255,0.06);
+    --card-radius: 15px;
+    --font: 'Share Tech', 'Arial', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font);
+    background: var(--pearl);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  /* ── BACKGROUND SYSTEM ── */
+  .bg-paper {
+    background: var(--pearl);
+  }
+  .bg-grad-tl {
+    background: var(--pearl) radial-gradient(ellipse at 0% 0%, rgba(119,68,255,0.13) 0%, transparent 60%);
+  }
+  .bg-grad-center {
+    background: var(--pearl) radial-gradient(ellipse at 50% 45%, rgba(119,68,255,0.15) 0%, transparent 65%);
+  }
+  .bg-grad-sweep {
+    background: linear-gradient(135deg, #EEEEEE 60%, #E8E2FF 100%);
+  }
+  .pat-dots {
+    background-image: radial-gradient(circle, #BBBBBB 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  .pat-grid {
+    background-image: linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  /* ── LAYOUT ── */
+  .page { min-height: 100vh; padding: 80px 60px 60px; position: relative; }
+  .container { max-width: 1140px; margin: 0 auto; }
+  .section-pad { padding: 72px 60px; }
+
+  /* ── NAVIGATION ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(238,238,238,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(119,68,255,0.12);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 60px;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; }
+  .nav-logo-text {
+    font-family: var(--font); font-size: 18px; font-weight: 700;
+    color: var(--accent); letter-spacing: 0.02em;
+  }
+  .nav-logo-sep { color: var(--ink-muted); font-size: 14px; margin: 0 4px; }
+  .nav-links { display: flex; gap: 0; }
+  .nav-links a {
+    font-family: var(--font); font-size: 13px; font-weight: 400;
+    color: var(--ink-soft); text-decoration: none;
+    padding: 0 16px; height: 60px; display: flex; align-items: center;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--accent); border-bottom-color: var(--accent);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink); color: rgba(255,255,255,0.55);
+    padding: 24px 60px; font-size: 13px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  footer span { letter-spacing: 0.04em; }
+  footer .footer-right { color: rgba(255,255,255,0.35); }
+
+  /* ── EYEBROW ── */
+  .eyebrow {
+    font-size: 11px; font-weight: 400; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 12px; display: block;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh; display: flex; align-items: center;
+    padding-top: 60px; position: relative; overflow: hidden;
+  }
+  .hero-inner { max-width: 1140px; margin: 0 auto; padding: 80px 60px; display: grid; grid-template-columns: 1fr 420px; gap: 80px; align-items: center; }
+  .hero-h1 { font-size: 72px; font-weight: 700; line-height: 1.0; color: var(--ink); margin-bottom: 24px; }
+  .hero-h1 em { font-style: normal; color: var(--accent); }
+  .hero-sub { font-size: 18px; color: var(--ink-soft); line-height: 1.6; max-width: 520px; margin-bottom: 36px; }
+  .hero-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 40px; }
+  .hero-stat { background: var(--white); border-radius: var(--card-radius); padding: 20px 16px; box-shadow: var(--card-shadow); text-align: center; }
+  .hero-stat-num { font-size: 32px; font-weight: 700; color: var(--accent); display: block; }
+  .hero-stat-lbl { font-size: 11px; color: var(--ink-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent); color: var(--white); border: none;
+    padding: 12px 28px; border-radius: 8px; font-family: var(--font); font-size: 14px;
+    cursor: pointer; text-decoration: none; transition: opacity 0.2s;
+    letter-spacing: 0.04em;
+  }
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-ghost {
+    background: transparent; color: var(--accent);
+    border: 1.5px solid var(--accent-mid);
+    padding: 12px 28px; border-radius: 8px; font-family: var(--font); font-size: 14px;
+    cursor: pointer; text-decoration: none; transition: all 0.2s;
+    letter-spacing: 0.04em;
+  }
+  .btn-ghost:hover { background: var(--accent-tint); }
+
+  /* Hero network illustration placeholder */
+  .hero-visual {
+    position: relative; width: 420px; height: 420px;
+  }
+  .hero-network {
+    width: 100%; height: 100%;
+    background: radial-gradient(ellipse at 50% 50%, rgba(119,68,255,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .network-center {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: var(--accent); opacity: 0.15;
+    position: absolute;
+  }
+  /* orbiting nodes */
+  .node {
+    position: absolute; border-radius: 50%;
+    background: var(--white); border: 2px solid var(--accent-mid);
+    box-shadow: 0 2px 12px rgba(119,68,255,0.18);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: var(--accent); font-weight: 700;
+  }
+  .node-lg { width: 52px; height: 52px; }
+  .node-md { width: 38px; height: 38px; }
+  .node-sm { width: 26px; height: 26px; }
+  .line-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+
+  /* ── SECTION HEADERS ── */
+  .section-header { text-align: center; max-width: 680px; margin: 0 auto 56px; }
+  .section-h2 { font-size: 42px; font-weight: 700; line-height: 1.1; margin-bottom: 16px; }
+  .section-p { font-size: 17px; color: var(--ink-soft); line-height: 1.65; }
+
+  /* ── OUTCOME CARDS ── */
+  .outcomes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1140px; margin: 0 auto; }
+  .outcome-card {
+    background: var(--white); border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    padding: 32px 28px; position: relative; overflow: hidden;
+    border-top: 3px solid var(--accent);
+  }
+  .outcome-card:nth-child(2) { border-top-color: #44BBFF; }
+  .outcome-card:nth-child(3) { border-top-color: var(--green); }
+  .outcome-num {
+    font-size: 48px; font-weight: 700; color: var(--accent); opacity: 0.12;
+    position: absolute; top: 16px; right: 20px; line-height: 1;
+  }
+  .outcome-card:nth-child(2) .outcome-num { color: #44BBFF; }
+  .outcome-card:nth-child(3) .outcome-num { color: var(--green); }
+  .outcome-tag {
+    display: inline-block; padding: 4px 10px; border-radius: 4px;
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    background: var(--accent-tint); color: var(--accent); margin-bottom: 16px; font-weight: 400;
+  }
+  .outcome-card:nth-child(2) .outcome-tag { background: #EAF7FF; color: #0099CC; }
+  .outcome-card:nth-child(3) .outcome-tag { background: #E6FFF5; color: #00994D; }
+  .outcome-h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; line-height: 1.25; }
+  .outcome-body { font-size: 14px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 20px; }
+  .outcome-result {
+    background: var(--pearl); border-radius: 8px; padding: 12px 14px;
+    font-size: 13px; color: var(--ink-soft);
+  }
+  .outcome-result strong { color: var(--ink); display: block; margin-bottom: 2px; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* ── MILESTONE TIMELINE ── */
+  #milestones { padding: 80px 60px; }
+  .timeline { max-width: 1000px; margin: 0 auto; position: relative; }
+  .timeline::before {
+    content: ''; position: absolute; left: 28px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(to bottom, var(--accent), var(--accent-mid), transparent);
+  }
+  .milestone {
+    display: flex; gap: 32px; margin-bottom: 40px; position: relative;
+  }
+  .ms-marker {
+    flex-shrink: 0; width: 58px; height: 58px; border-radius: 50%;
+    background: var(--white); border: 2px solid var(--accent-mid);
+    box-shadow: 0 0 0 4px var(--accent-tint);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; color: var(--accent);
+    position: relative; z-index: 1;
+  }
+  .ms-marker.complete { background: var(--accent); color: var(--white); border-color: var(--accent); }
+  .ms-card {
+    flex: 1; background: var(--white); border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow); padding: 24px 28px;
+  }
+  .ms-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+  .ms-title { font-size: 17px; font-weight: 700; }
+  .ms-timing {
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); background: var(--accent-tint);
+    padding: 3px 10px; border-radius: 4px; white-space: nowrap;
+  }
+  .ms-body { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+  .ms-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .ms-tag {
+    font-size: 11px; color: var(--ink-muted); background: var(--pearl);
+    padding: 3px 8px; border-radius: 4px; letter-spacing: 0.04em;
+  }
+
+  /* ── PROGRAMS SECTION ── */
+  #programs { padding: 80px 60px; }
+  .programs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1140px; margin: 0 auto; }
+  .program-card {
+    background: var(--white); border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow); padding: 32px;
+  }
+  .program-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: var(--accent-tint); display: flex; align-items: center; justify-content: center;
+    margin-bottom: 18px;
+  }
+  .program-icon svg { width: 22px; height: 22px; }
+  .program-h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+  .program-body { font-size: 14px; color: var(--ink-soft); line-height: 1.65; margin-bottom: 18px; }
+  .program-list { list-style: none; }
+  .program-list li {
+    font-size: 13px; color: var(--ink-soft); padding: 7px 0;
+    border-bottom: 1px solid var(--pearl);
+    display: flex; align-items: flex-start; gap: 8px;
+  }
+  .program-list li:last-child { border-bottom: none; }
+  .program-list li::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-top: 7px; flex-shrink: 0; }
+
+  /* ── TAB SECTIONS ── */
+  .tab-section { padding: 80px 60px; }
+  .tab-nav { display: flex; gap: 0; border-bottom: 2px solid var(--pearl); margin-bottom: 48px; max-width: 1140px; margin-left: auto; margin-right: auto; }
+  .tab-btn {
+    font-family: var(--font); font-size: 13px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-muted);
+    background: none; border: none; cursor: pointer;
+    padding: 12px 24px; border-bottom: 2px solid transparent; margin-bottom: -2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .tab-btn:hover { color: var(--accent); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-content { display: none; max-width: 1140px; margin: 0 auto; }
+  .tab-content.active { display: block; }
+
+  /* Integration instruction cards */
+  .integration-header { margin-bottom: 32px; }
+  .integration-header h3 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .integration-header p { font-size: 15px; color: var(--ink-soft); max-width: 640px; line-height: 1.6; }
+  .steps-list { counter-reset: steps; }
+  .step-item {
+    display: flex; gap: 24px; margin-bottom: 24px;
+    background: var(--white); border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow); padding: 24px 28px;
+  }
+  .step-num {
+    flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%;
+    background: var(--accent); color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 700;
+  }
+  .step-content h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .step-content p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+  .step-content code {
+    background: var(--pearl); padding: 2px 6px; border-radius: 4px;
+    font-size: 12px; font-family: 'Courier New', monospace; color: var(--accent);
+  }
+  .step-note {
+    background: var(--accent-tint); border-left: 3px solid var(--accent);
+    padding: 12px 16px; border-radius: 0 8px 8px 0; margin-top: 10px;
+    font-size: 13px; color: var(--ink-soft); line-height: 1.5;
+  }
+  .two-col-steps { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  /* Corporate Network table */
+  .network-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .network-card {
+    background: var(--white); border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow); padding: 24px;
+  }
+  .network-card h4 { font-size: 14px; font-weight: 700; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 12px; }
+  .network-card ul { list-style: none; }
+  .network-card ul li {
+    font-size: 13px; color: var(--ink-soft); padding: 5px 0;
+    border-bottom: 1px solid var(--pearl);
+    display: flex; gap: 8px; align-items: flex-start;
+  }
+  .network-card ul li:last-child { border-bottom: none; }
+  .network-card ul li::before { content: ''; display: block; width: 5px; height: 5px; border-radius: 50%; background: var(--accent-mid); margin-top: 7px; flex-shrink: 0; }
+  .priority-badge {
+    display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 3px;
+    letter-spacing: 0.08em; text-transform: uppercase; margin-left: 8px;
+  }
+  .priority-high { background: #FFF0F0; color: #CC2200; }
+  .priority-med { background: var(--yellow); color: #7A5500; }
+  .priority-low { background: var(--pearl); color: var(--ink-muted); }
+
+  /* ── ICP SECTION ── */
+  .icp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1140px; margin: 0 auto; }
+  .icp-card {
+    background: var(--white); border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow); padding: 24px 20px;
+  }
+  .icp-card-header {
+    background: var(--accent-tint); border-radius: 8px; padding: 12px 14px;
+    margin-bottom: 16px;
+  }
+  .icp-card-header h4 { font-size: 14px; font-weight: 700; color: var(--accent); }
+  .icp-card-header p { font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
+  .icp-row { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid var(--pearl); font-size: 13px; }
+  .icp-row:last-child { border-bottom: none; }
+  .icp-label { color: var(--ink-muted); flex-shrink: 0; margin-right: 12px; }
+  .icp-value { color: var(--ink); text-align: right; font-size: 12px; }
+
+  /* ── SPECIALTY TAGS ── */
+  .spec-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+  .spec-tag {
+    background: var(--white); border: 1.5px solid var(--accent-mid);
+    border-radius: 8px; padding: 8px 14px; font-size: 13px; color: var(--ink);
+  }
+  .spec-tag strong { color: var(--accent); }
+
+  /* ── SEPARATOR ── */
+  .section-rule { border: none; border-top: 1px solid rgba(119,68,255,0.12); margin: 0; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .outcomes-grid, .programs-grid, .icp-grid, .network-grid { grid-template-columns: 1fr; }
+    .two-col-steps { grid-template-columns: 1fr; }
+    nav { padding: 0 20px; }
+    .nav-links a { padding: 0 10px; font-size: 11px; }
+    .page, .section-pad, #milestones, #programs, .tab-section { padding-left: 20px; padding-right: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav>
+  <div class="nav-logo">
+    <span class="nav-logo-text">vieu</span>
+    <span class="nav-logo-sep">&times;</span>
+    <span style="font-family: var(--font); font-size: 15px; color: var(--ink-soft);">DeliverHealth</span>
+  </div>
+  <div class="nav-links">
+    <a href="#outcomes" onclick="setActive(this)">Outcomes</a>
+    <a href="#milestones" onclick="setActive(this)">Milestones</a>
+    <a href="#programs" onclick="setActive(this)">Programs</a>
+    <a href="#icp" onclick="setActive(this)">ICP</a>
+    <a href="#integrations" onclick="setActive(this)">Setup</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero" class="bg-grad-center">
+  <div class="hero-inner">
+    <div>
+      <span class="eyebrow">Growth Program 2026</span>
+      <h1 class="hero-h1">The window<br>to win <em>AI-RCM</em><br>is now.</h1>
+      <p class="hero-sub">Epic, Cerner, and DAX are moving fast. DeliverHealth has the install base, the product, and 15,000 physicians who already trust you. Vieu maps the path to the first RCM customer, the Instacode upsell pipeline, and an AI-first commercial team — before the window closes.</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-num">15K</span>
+          <span class="hero-stat-lbl">Physicians on Instanote</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">300</span>
+          <span class="hero-stat-lbl">Accounts in Scope</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">5K</span>
+          <span class="hero-stat-lbl">NB Accounts Scored</span>
+        </div>
+      </div>
+      <div class="hero-cta">
+        <a href="#outcomes" class="btn-primary">See the plan</a>
+        <a href="#integrations" class="btn-ghost">Get set up</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-network">
+        <!-- SVG connection lines -->
+        <svg class="line-svg" viewBox="0 0 420 420">
+          <line x1="210" y1="210" x2="120" y2="100" stroke="#C4B0FF" stroke-width="1.5" opacity="0.6"/>
+          <line x1="210" y1="210" x2="330" y2="120" stroke="#C4B0FF" stroke-width="1.5" opacity="0.6"/>
+          <line x1="210" y1="210" x2="340" y2="280" stroke="#C4B0FF" stroke-width="1.5" opacity="0.6"/>
+          <line x1="210" y1="210" x2="100" y2="300" stroke="#C4B0FF" stroke-width="1.5" opacity="0.6"/>
+          <line x1="210" y1="210" x2="180" y2="350" stroke="#C4B0FF" stroke-width="1.5" opacity="0.6"/>
+          <line x1="210" y1="210" x2="70" y2="185" stroke="#C4B0FF" stroke-width="1" opacity="0.4"/>
+          <line x1="120" y1="100" x2="330" y2="120" stroke="#C4B0FF" stroke-width="1" opacity="0.3"/>
+          <line x1="330" y1="120" x2="340" y2="280" stroke="#C4B0FF" stroke-width="1" opacity="0.3"/>
+        </svg>
+        <!-- Center node -->
+        <div class="node node-lg" style="top: 50%; left: 50%; transform: translate(-50%,-50%); border-color: var(--accent); background: var(--accent-tint);">DH</div>
+        <!-- Outer nodes -->
+        <div class="node node-md" style="top: 14%; left: 22%;">Sy</div>
+        <div class="node node-md" style="top: 16%; left: 66%;">AI-RCM</div>
+        <div class="node node-md" style="top: 60%; left: 74%;">Code</div>
+        <div class="node node-md" style="top: 66%; left: 18%;">Note</div>
+        <div class="node node-sm" style="top: 79%; left: 40%;">Kyle</div>
+        <div class="node node-sm" style="top: 40%; left: 8%;">Vieu</div>
+        <div class="node node-sm" style="top: 28%; left: 78%;">Optum</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-rule">
+
+<!-- ── OUTCOMES ── -->
+<section id="outcomes" class="section-pad bg-paper">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Three Outcomes</span>
+      <h2 class="section-h2">What we're building toward together.</h2>
+      <p class="section-p">Everything Vieu does is oriented around three measurable outcomes. Every account plan, warm intro, and scored list maps back to one of these.</p>
+    </div>
+    <div class="outcomes-grid">
+      <div class="outcome-card">
+        <div class="outcome-num">01</div>
+        <span class="outcome-tag">New Business</span>
+        <h3 class="outcome-h3">Land the First AI-RCM Customer</h3>
+        <p class="outcome-body">Vieu identifies best-fit accounts from the 300-account pipeline, surfaces warm intro paths through Sy's investor network and Vieu's graph, and supports outreach to land DeliverHealth's landmark RCM logo. Target profile: Oracle Cerner and Athena shops with open RCM/coding roles, CFO or VP Revenue Cycle as economic buyer.</p>
+        <div class="outcome-result">
+          <strong>Target Outcome</strong>
+          First AI-RCM contract signed in 2026 — CEO reward milestone
+        </div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num">02</div>
+        <span class="outcome-tag">Expansion</span>
+        <h3 class="outcome-h3">Upsell Instanote, Add Instacode Across Top 20</h3>
+        <p class="outcome-body">Vieu's graph surfaces the 20 highest-probability Instanote accounts to convert to dual-product. Andrea's team gets one curated account plan per target: buying committee, warm paths, signal context, and recommended messaging. Focus on ortho surgical, behavioral health, radiology, and pediatrics where the coding use case is clearest.</p>
+        <div class="outcome-result">
+          <strong>Target Outcome</strong>
+          12-15 dual-product customers by end of 2026 — mix of existing and net new
+        </div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num">03</div>
+        <span class="outcome-tag">Enablement</span>
+        <h3 class="outcome-h3">Deploy an AI-First Commercial Team</h3>
+        <p class="outcome-body">Full AI-first training for Andrea, Shanley, Kyle Hickok, and the sales team. Vieu's agents replace manual prospecting, research, and outreach prep. Reps spend time on relationships, not admin. Sales Ops (new hire) onboards with AI-first habits from day one. Target: outperform current 2-4% reply rates by 10x on priority accounts.</p>
+        <div class="outcome-result">
+          <strong>Target Outcome</strong>
+          AI-first commercial motion operational within 30 days of kick-off
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-rule">
+
+<!-- ── MILESTONES ── -->
+<section id="milestones" class="bg-grad-tl pat-dots">
+  <div class="container" style="padding: 80px 0;">
+    <div class="section-header">
+      <span class="eyebrow">Delivery Plan</span>
+      <h2 class="section-h2">Milestones and actions, month by month.</h2>
+      <p class="section-p">Structured around bursts of deliverables — each one designed to give the team something to act on within days of receiving it.</p>
+    </div>
+    <div class="timeline">
+      <div class="milestone">
+        <div class="ms-marker complete">W1</div>
+        <div class="ms-card">
+          <div class="ms-header">
+            <span class="ms-title">Tenant Configured. 300-Account List Ingested.</span>
+            <span class="ms-timing">Week 1-2</span>
+          </div>
+          <p class="ms-body">DeliverHealth delivers account list (CSV or CRM export). Vieu configures the DeliverHealth tenant, loads all accounts, runs initial enrichment against the graph. Slack Connect or Teams channel opened. Kick-off call with Sy, Andrea, Shanley, Kyle Hickok, and Serrah.</p>
+          <div class="ms-tags">
+            <span class="ms-tag">Account list delivery</span>
+            <span class="ms-tag">Tenant setup</span>
+            <span class="ms-tag">Team onboarding</span>
+          </div>
+        </div>
+      </div>
+      <div class="milestone">
+        <div class="ms-marker">W2</div>
+        <div class="ms-card">
+          <div class="ms-header">
+            <span class="ms-title">Top AI-RCM Targets Prioritized and Ranked</span>
+            <span class="ms-timing">Week 2-4</span>
+          </div>
+          <p class="ms-body">Vieu scores and ranks the 300-account list by AI-RCM fit, warm path availability, and intent signals. Top 10 AI-RCM candidates surfaced with org maps, buying committee identification, and initial warm path analysis. Priority focus: Oracle Cerner and Athena accounts with open RCM/coding roles and CFO or VP Revenue Cycle as economic buyer.</p>
+          <div class="ms-tags">
+            <span class="ms-tag">Account scoring</span>
+            <span class="ms-tag">Org maps</span>
+            <span class="ms-tag">Buyer committee</span>
+            <span class="ms-tag">Warm path analysis</span>
+          </div>
+        </div>
+      </div>
+      <div class="milestone">
+        <div class="ms-marker">W3</div>
+        <div class="ms-card">
+          <div class="ms-header">
+            <span class="ms-title">AI-First Commercial Workshop + Warm Intro Orchestration Begins</span>
+            <span class="ms-timing">Week 3-5</span>
+          </div>
+          <p class="ms-body">Full-team AI-first commercial training workshop delivered (Sy, Andrea, Shanley, Kyle + Serrah). Live tenant walkthrough. Simultaneously, Vieu begins warm intro orchestration for top AI-RCM target: investor network mining, Samir's and Serrah's network activated, intro paths presented to Sy. Al Smith path progressed for Lifepoint if applicable.</p>
+          <div class="ms-tags">
+            <span class="ms-tag">AI training workshop</span>
+            <span class="ms-tag">Warm intro orchestration</span>
+            <span class="ms-tag">Investor network mining</span>
+          </div>
+        </div>
+      </div>
+      <div class="milestone">
+        <div class="ms-marker">M2</div>
+        <div class="ms-card">
+          <div class="ms-header">
+            <span class="ms-title">Instacode Upsell — Top 20 Account Plans Delivered</span>
+            <span class="ms-timing">Month 2</span>
+          </div>
+          <p class="ms-body">20 curated account plans delivered for highest-probability Instanote-to-Instacode conversions. Each plan includes: stakeholder map with warm paths, recommended outreach messaging, active signals (job posts, tech signals, competitor mentions). Plans formatted for direct use by Andrea and AEs — who to call, what to say, what to act on.</p>
+          <div class="ms-tags">
+            <span class="ms-tag">20 account plans</span>
+            <span class="ms-tag">Stakeholder maps</span>
+            <span class="ms-tag">Outreach messaging</span>
+          </div>
+        </div>
+      </div>
+      <div class="milestone">
+        <div class="ms-marker">M3</div>
+        <div class="ms-card">
+          <div class="ms-header">
+            <span class="ms-title">First NB Campaign Cohort — Ortho Surgical Focus</span>
+            <span class="ms-timing">Month 2-3</span>
+          </div>
+          <p class="ms-body">First burst of net-new account scoring delivered. Vieu scores 800-1,000 ortho surgical and specialty practices from the 5K NB list. Output: enriched CSV with company, recommended contacts by name and email, curated outreach message per account — formatted for direct ingestion into Outreach.io. Team executes. Baseline reply rate established for benchmarking against spray-and-pray campaigns.</p>
+          <div class="ms-tags">
+            <span class="ms-tag">800-1K accounts scored</span>
+            <span class="ms-tag">Outreach.io-ready CSV</span>
+            <span class="ms-tag">Ortho surgical focus</span>
+            <span class="ms-tag">Benchmark campaign</span>
+          </div>
+        </div>
+      </div>
+      <div class="milestone">
+        <div class="ms-marker">M4</div>
+        <div class="ms-card">
+          <div class="ms-header">
+            <span class="ms-title">Cohort 2 + First QBR</span>
+            <span class="ms-timing">Month 3-4</span>
+          </div>
+          <p class="ms-body">Second NB scoring burst delivered — behavioral health and radiology focus (includes legacy Powerscribe targeting). First QBR with Sy, Andrea, and Serrah: meetings landed vs. baseline, pipeline created, Instacode upsell progress, AI-RCM target status. Closed-loop CRM attribution reviewed. Benchmark campaign results vs. Vieu-enriched campaign compared.</p>
+          <div class="ms-tags">
+            <span class="ms-tag">Behavioral health cohort</span>
+            <span class="ms-tag">Radiology / Powerscribe</span>
+            <span class="ms-tag">QBR — 90 days</span>
+            <span class="ms-tag">Attribution review</span>
+          </div>
+        </div>
+      </div>
+      <div class="milestone">
+        <div class="ms-marker">M5</div>
+        <div class="ms-card">
+          <div class="ms-header">
+            <span class="ms-title">5K Accounts Fully Scored. Cohort 3 Live.</span>
+            <span class="ms-timing">Month 4-5</span>
+          </div>
+          <p class="ms-body">Full 5,000 NB account scoring complete. Pediatrics and ED/Urgent Care cohort delivered. DeliverHealth now has a fully enriched, ranked, and actioned NB pipeline across all priority specialties. Remaining quarterly program runs on cadence: warm intro orchestration on strategic accounts, account plan updates, list replenishment.</p>
+          <div class="ms-tags">
+            <span class="ms-tag">5K scoring complete</span>
+            <span class="ms-tag">Pediatrics + ED cohort</span>
+            <span class="ms-tag">Full pipeline operational</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-rule">
+
+<!-- ── PROGRAMS ── -->
+<section id="programs" class="section-pad bg-paper">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">What Vieu Delivers</span>
+      <h2 class="section-h2">Three programs. One team behind you.</h2>
+    </div>
+    <div class="programs-grid">
+      <div class="program-card">
+        <div class="program-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7744FF" stroke-width="1.8">
+            <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+          </svg>
+        </div>
+        <h3 class="program-h3">Vieu Warm Intros</h3>
+        <p class="program-body">Vieu mines Sy's investor network, Serrah's network, and Samir's network for C-suite and economic buyer access. No cold outreach for priority targets — every intro is routed through a real relationship.</p>
+        <ul class="program-list">
+          <li>Quarterly prioritized target account list aligned to ICP</li>
+          <li>Investor and board connection mapping per target</li>
+          <li>Warm path orchestration for top AI-RCM and Instacode accounts</li>
+          <li>Intro facilitation and outreach scripting support</li>
+          <li>Special focus: Optum, Innovaccer, Google Next contacts, Lifepoint, Baylor</li>
+        </ul>
+      </div>
+      <div class="program-card">
+        <div class="program-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7744FF" stroke-width="1.8">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+          </svg>
+        </div>
+        <h3 class="program-h3">Vieu Account Planning</h3>
+        <p class="program-body">Curated account plans for the 300 existing accounts and top upsell targets. Each plan is human-QC'd before delivery. Reps get exactly what they need to act — no raw data to interpret.</p>
+        <ul class="program-list">
+          <li>Stakeholder map with buying committee identified</li>
+          <li>Org chart enrichment — economic buyers surfaced above HIM level</li>
+          <li>Opportunities, technographics, social media signals</li>
+          <li>Recommended outreach message per key contact</li>
+          <li>Plans formatted for Vieu tenant or direct rep use</li>
+        </ul>
+      </div>
+      <div class="program-card">
+        <div class="program-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7744FF" stroke-width="1.8">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+        </div>
+        <h3 class="program-h3">Vieu List Scoring and Enrichment</h3>
+        <p class="program-body">Up to 5,000 NB accounts scored, ranked, and returned as enriched CSVs — formatted for Outreach.io, Salesforce, or HubSpot ingestion. Each cohort delivered every few weeks so the team has a fresh campaign to execute.</p>
+        <ul class="program-list">
+          <li>ICP fit scoring, intent signals, and warm path availability</li>
+          <li>Contact name, email (bounce-verified), and recommended outreach message</li>
+          <li>Cohort 1: Ortho Surgical (800-1,000 accounts)</li>
+          <li>Cohort 2: Behavioral Health + Radiology / Powerscribe</li>
+          <li>Cohort 3: Pediatrics + ED/Urgent Care</li>
+        </ul>
+      </div>
+      <div class="program-card">
+        <div class="program-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7744FF" stroke-width="1.8">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <h3 class="program-h3">AI-First Commercial Enablement</h3>
+        <p class="program-body">Vieu transforms how Andrea's team works. Agents replace manual research, ZoomInfo scrolling, and generic outreach prep. One structured workflow from prospect signal to personalized message — running every week.</p>
+        <ul class="program-list">
+          <li>AI-first commercial training workshop (full team + Serrah)</li>
+          <li>Live tenant walkthrough and activation</li>
+          <li>Weekly cadence calls — existing and new business focus</li>
+          <li>1:1 working sessions and coaching available on-demand</li>
+          <li>Sales Ops new hire onboarded AI-first from day one</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-rule">
+
+<!-- ── ICP ── -->
+<section id="icp" class="section-pad bg-grad-sweep">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Ideal Customer Profile</span>
+      <h2 class="section-h2">Who Vieu is targeting for you.</h2>
+      <p class="section-p">Three distinct ICP motions, each with its own scoring criteria, buyer persona, and Vieu action.</p>
+    </div>
+    <div class="icp-grid">
+      <div class="icp-card">
+        <div class="icp-card-header">
+          <h4>Use Case A — Instanote + Instacode Upsell</h4>
+          <p>Cross-sell into existing 300-account base</p>
+        </div>
+        <div class="icp-row"><span class="icp-label">Geo</span><span class="icp-value">USA</span></div>
+        <div class="icp-row"><span class="icp-label">Segment</span><span class="icp-value">Health systems, Hospitals, ASCs, Physician Groups</span></div>
+        <div class="icp-row"><span class="icp-label">Revenue</span><span class="icp-value">$10M - $500M</span></div>
+        <div class="icp-row"><span class="icp-label">Buyers</span><span class="icp-value">CMO, CMIO, VP Revenue Cycle, CFO</span></div>
+        <div class="icp-row"><span class="icp-label">Key Signal</span><span class="icp-value">Current Instanote user; manual or outsourced coding</span></div>
+        <div class="icp-row"><span class="icp-label">Vieu Action</span><span class="icp-value">Account plan + warm path above HIM level</span></div>
+        <div class="icp-row"><span class="icp-label">Displace</span><span class="icp-value">Nuance DAX, Suki, Fathom, 3M, nThrive</span></div>
+      </div>
+      <div class="icp-card">
+        <div class="icp-card-header">
+          <h4>Use Case B — New Logo AI-RCM</h4>
+          <p>First AI-RCM customer — agentic workflow sale</p>
+        </div>
+        <div class="icp-row"><span class="icp-label">Geo</span><span class="icp-value">USA</span></div>
+        <div class="icp-row"><span class="icp-label">Segment</span><span class="icp-value">Independent groups, community hospitals, billing cos</span></div>
+        <div class="icp-row"><span class="icp-label">Revenue</span><span class="icp-value">$20M - $1B</span></div>
+        <div class="icp-row"><span class="icp-label">Buyers</span><span class="icp-value">CFO, VP Revenue Cycle, Director of Coding</span></div>
+        <div class="icp-row"><span class="icp-label">Key Signal</span><span class="icp-value">Open RCM/coding roles; dissatisfied with billing vendor</span></div>
+        <div class="icp-row"><span class="icp-label">EMR Priority</span><span class="icp-value">Oracle Cerner (1st), Athena (2nd), Epic (3rd)</span></div>
+        <div class="icp-row"><span class="icp-label">Displace</span><span class="icp-value">Optum360, Ensemble, R1 RCM, Waystar, Conifer</span></div>
+      </div>
+      <div class="icp-card">
+        <div class="icp-card-header">
+          <h4>Use Case C — High-Volume Practice Motion</h4>
+          <p>Scale motion — scored lists, enriched CSV campaigns</p>
+        </div>
+        <div class="icp-row"><span class="icp-label">Geo</span><span class="icp-value">USA — regional and local independent practices</span></div>
+        <div class="icp-row"><span class="icp-label">Segment</span><span class="icp-value">Independent physician and specialty practices</span></div>
+        <div class="icp-row"><span class="icp-label">Employees</span><span class="icp-value">10 - 10,000</span></div>
+        <div class="icp-row"><span class="icp-label">Buyers</span><span class="icp-value">Practice Manager, Physician CEO/Owner, Chief of Staff</span></div>
+        <div class="icp-row"><span class="icp-label">Key Signal</span><span class="icp-value">High encounter volume; independent (not IDN-owned)</span></div>
+        <div class="icp-row"><span class="icp-label">Vieu Action</span><span class="icp-value">Score, enrich, CSV → Outreach.io ingestion</span></div>
+      </div>
+    </div>
+
+    <div style="max-width: 1140px; margin: 48px auto 0;">
+      <span class="eyebrow" style="margin-bottom: 16px;">Priority Specialties</span>
+      <div class="spec-grid">
+        <div class="spec-tag"><strong>Ortho Surgical</strong> — Instacode + Instanote; dual modality; high chart value</div>
+        <div class="spec-tag"><strong>Behavioral Health</strong> — large footprint; dictation preferred; telehealth crossover</div>
+        <div class="spec-tag"><strong>Radiology</strong> — autonomous coding; Powerscribe replacement campaign</div>
+        <div class="spec-tag"><strong>Pediatrics</strong> — high denial rates; documentation + coding automation fit</div>
+        <div class="spec-tag"><strong>ED / Urgent Care</strong> — 70-80% autonomous coding rate achieved</div>
+        <div class="spec-tag"><strong>Broader Surgical</strong> — cardio, uro, higher medical intensity; DAX/Suki blind spot</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-rule">
+
+<!-- ── INTEGRATIONS / SETUP ── -->
+<section id="integrations" class="section-pad bg-paper">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Setup Guide</span>
+      <h2 class="section-h2">Get DeliverHealth connected.</h2>
+      <p class="section-p">Four setup tracks. Complete Corporate Network and LinkedIn CSV first — these unlock the most value on day one.</p>
+    </div>
+
+    <!-- Tab nav -->
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="showTab('tab-network', this)">Corporate Network</button>
+      <button class="tab-btn" onclick="showTab('tab-linkedin', this)">LinkedIn CSV</button>
+      <button class="tab-btn" onclick="showTab('tab-sfdc', this)">Salesforce</button>
+      <button class="tab-btn" onclick="showTab('tab-hubspot', this)">HubSpot</button>
+    </div>
+
+    <!-- Corporate Network -->
+    <div id="tab-network" class="tab-content active">
+      <div class="integration-header">
+        <span class="eyebrow">Priority: High</span>
+        <h3>Build DeliverHealth's Corporate Network</h3>
+        <p>Review and add the key people in your network to Vieu — this is the foundation of every warm intro path. The richer this list, the more introduction options Vieu can surface across your 300 accounts.</p>
+      </div>
+      <div class="network-grid">
+        <div class="network-card">
+          <h4>Executive Leadership</h4>
+          <ul>
+            <li>Sy (CEO) — investor and strategic relationships <span class="priority-badge priority-high">High</span></li>
+            <li>Andrea (Head of Sales) — customer and partner contacts</li>
+            <li>Kyle Hickok (GTM Adviser) — PE firms, RCM ecosystem</li>
+            <li>Sales Ops (new hire) — add on onboarding</li>
+          </ul>
+        </div>
+        <div class="network-card">
+          <h4>Investor and Board Network</h4>
+          <ul>
+            <li>Sy's investor contacts — mine for C-suite intro paths <span class="priority-badge priority-high">High</span></li>
+            <li>Board members with health system relationships</li>
+            <li>Adviser relationships (Triple-3, PE connections via Kyle)</li>
+          </ul>
+        </div>
+        <div class="network-card">
+          <h4>Strategic Partners</h4>
+          <ul>
+            <li>Optum — Annalhees Elm, Ashish Dhar <span class="priority-badge priority-high">High</span></li>
+            <li>Innovaccer — Vibav connection</li>
+            <li>Google / Google Next contacts</li>
+            <li>R1 RCM — existing transcription partner relationship</li>
+          </ul>
+        </div>
+        <div class="network-card">
+          <h4>Key Account Contacts</h4>
+          <ul>
+            <li>Lifepoint — Alan Smith (SVP CIO), escalate above Mary (VP HIM) <span class="priority-badge priority-high">High</span></li>
+            <li>Baylor — move above Jennifer Allen (HIM Director)</li>
+            <li>Any existing customer CMO/CMIO/CFO relationships</li>
+          </ul>
+        </div>
+        <div class="network-card">
+          <h4>Vieu Network (Active)</h4>
+          <ul>
+            <li>Serrah — RCM and health IT network <span class="priority-badge priority-med">Active</span></li>
+            <li>Samir (Vieu CEO) — enterprise and investor network</li>
+            <li>Al Smith outreach — in progress</li>
+          </ul>
+        </div>
+        <div class="network-card">
+          <h4>Action Required</h4>
+          <ul>
+            <li>Review existing corporate network in Vieu — remove irrelevant contacts</li>
+            <li>Add new people in each category above</li>
+            <li>Confirm Sy's investor contact list for Vieu to mine</li>
+            <li>Share any Google Next contacts from recent conversations</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- LinkedIn CSV -->
+    <div id="tab-linkedin" class="tab-content">
+      <div class="integration-header">
+        <span class="eyebrow">Priority: Medium</span>
+        <h3>Upload LinkedIn Connections to Vieu</h3>
+        <p>Download and upload the LinkedIn connections of DeliverHealth's leadership team and key introducers. This significantly expands Vieu's ability to find warm paths into target accounts.</p>
+      </div>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>Go to LinkedIn Settings</h4>
+            <p>Log in to LinkedIn. Click your profile picture in the top-right corner, then select <code>Settings &amp; Privacy</code>.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>Navigate to Data Privacy</h4>
+            <p>In the left sidebar, click <code>Data Privacy</code>. Then click <code>Get a copy of your data</code>.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>Select Connections Data</h4>
+            <p>Choose <code>Want something in particular? Select the data files you're most interested in</code>. Check the box for <code>Connections</code> only. Click <code>Request archive</code>.</p>
+            <div class="step-note">LinkedIn will email you a download link within 10 minutes for connections data (vs. 24 hours for the full archive). Use this faster method.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>Download the CSV</h4>
+            <p>Click the link in the LinkedIn email. Download the file — it will be a <code>.zip</code> containing <code>Connections.csv</code>. Extract the CSV file.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <h4>Upload to Vieu</h4>
+            <p>Log in to Vieu. Navigate to <code>Network</code> and select <code>Upload LinkedIn CSV</code>. Upload the <code>Connections.csv</code> file. Vieu will process and map the connections against your target accounts.</p>
+            <div class="step-note">Repeat this for Sy, Andrea, and Kyle Hickok — each person's connections expands the warm path surface area for your 300 accounts.</div>
+          </div>
+        </div>
+      </div>
+      <div style="background: var(--accent-tint); border-radius: var(--card-radius); padding: 24px 28px; margin-top: 8px;">
+        <span class="eyebrow" style="margin-bottom: 8px;">Who to prioritize</span>
+        <p style="font-size: 14px; color: var(--ink-soft);">Start with <strong>Sy</strong> (investor network, strategic partner relationships), then <strong>Kyle Hickok</strong> (RCM ecosystem, PE firm connections), then <strong>Andrea</strong> (existing customer and partner contacts). Each upload takes less than 5 minutes.</p>
+      </div>
+    </div>
+
+    <!-- Salesforce -->
+    <div id="tab-sfdc" class="tab-content">
+      <div class="integration-header">
+        <span class="eyebrow">Priority: Low — complete after network setup</span>
+        <h3>Integrate Salesforce with Vieu</h3>
+        <p>Connecting Salesforce allows Vieu to sync your existing pipeline, match Vieu intelligence against live opportunities, and support CRM attribution for the outcome-based reward reporting.</p>
+      </div>
+      <div class="two-col-steps">
+        <div>
+          <div class="steps-list">
+            <div class="step-item">
+              <div class="step-num">1</div>
+              <div class="step-content">
+                <h4>Access Vieu Integrations</h4>
+                <p>Log in to Vieu. Navigate to <code>Settings</code> then <code>Integrations</code>. Select <code>Salesforce</code>.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">2</div>
+              <div class="step-content">
+                <h4>Authenticate with Salesforce</h4>
+                <p>Click <code>Connect Salesforce</code>. You will be redirected to Salesforce's OAuth login. Enter your Salesforce admin credentials and approve the Vieu integration.</p>
+                <div class="step-note">You need Salesforce Admin or API-enabled user credentials to complete this step.</div>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">3</div>
+              <div class="step-content">
+                <h4>Map Your Objects</h4>
+                <p>Select which Salesforce objects to sync: <code>Accounts</code>, <code>Contacts</code>, <code>Opportunities</code>. Map Vieu's enrichment fields to your existing Salesforce fields or create new custom fields.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="steps-list">
+            <div class="step-item">
+              <div class="step-num">4</div>
+              <div class="step-content">
+                <h4>Configure Sync Direction</h4>
+                <p>Choose bidirectional sync or Vieu-to-Salesforce only. For DeliverHealth, Vieu recommends Vieu-to-Salesforce for enrichment fields and Salesforce-to-Vieu for account and opportunity status.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">5</div>
+              <div class="step-content">
+                <h4>Set Up Attribution Tracking</h4>
+                <p>Create a custom field on the <code>Opportunity</code> object: <code>Vieu_Influenced__c</code> (Checkbox) and <code>Vieu_Meeting_Date__c</code> (Date). These fields enable the closed-loop reporting required for the outcome-based fee structure.</p>
+                <div class="step-note">This step is required for Vieu-influenced deal reward tracking per the MLA. Confirm with your Sales Ops hire on setup.</div>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">6</div>
+              <div class="step-content">
+                <h4>Run Initial Sync</h4>
+                <p>Trigger the first full sync. Vieu will match your Salesforce accounts against the graph and begin enriching. Initial sync typically completes within 2-4 hours depending on account volume.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HubSpot -->
+    <div id="tab-hubspot" class="tab-content">
+      <div class="integration-header">
+        <span class="eyebrow">Priority: Low — complete after network setup</span>
+        <h3>Integrate HubSpot with Vieu</h3>
+        <p>If DeliverHealth uses HubSpot alongside or instead of Salesforce, connect it to Vieu for the same enrichment, sync, and attribution capabilities.</p>
+      </div>
+      <div class="two-col-steps">
+        <div>
+          <div class="steps-list">
+            <div class="step-item">
+              <div class="step-num">1</div>
+              <div class="step-content">
+                <h4>Access Vieu Integrations</h4>
+                <p>Log in to Vieu. Navigate to <code>Settings</code> then <code>Integrations</code>. Select <code>HubSpot</code>.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">2</div>
+              <div class="step-content">
+                <h4>Authenticate with HubSpot</h4>
+                <p>Click <code>Connect HubSpot</code>. You will be redirected to HubSpot's OAuth flow. Log in with a HubSpot Super Admin account and grant the requested permissions.</p>
+                <div class="step-note">Vieu requires access to Contacts, Companies, and Deals objects. Review the permissions screen and confirm before approving.</div>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">3</div>
+              <div class="step-content">
+                <h4>Select Your HubSpot Portal</h4>
+                <p>If your HubSpot account has multiple portals, select the correct one for DeliverHealth's sales pipeline. Confirm the portal ID matches your active CRM.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="steps-list">
+            <div class="step-item">
+              <div class="step-num">4</div>
+              <div class="step-content">
+                <h4>Map Properties</h4>
+                <p>Map Vieu enrichment data to HubSpot properties: Company enrichment to <code>Company</code> object, contact intelligence to <code>Contact</code> object, opportunity signals to <code>Deal</code> object.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">5</div>
+              <div class="step-content">
+                <h4>Create Attribution Properties</h4>
+                <p>In HubSpot, create two custom Deal properties: <code>Vieu Influenced</code> (Checkbox) and <code>Vieu Meeting Date</code> (Date picker). These support closed-loop reporting for outcome-based fees.</p>
+                <div class="step-note">Same requirement as the Salesforce integration — needed for quarterly outcome reports per the MLA attribution section.</div>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">6</div>
+              <div class="step-content">
+                <h4>Configure Lists for Campaign Export</h4>
+                <p>Set up a HubSpot list to receive Vieu-enriched NB contacts. When Vieu delivers each cohort CSV, contacts can be imported directly into this list for enrollment in HubSpot sequences or Outreach.io campaigns.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span>©Vieu 2026 &bull; Connect to Close &nbsp;|&nbsp; Built on 9B Executive Relationships</span>
+  <span class="footer-right">DeliverHealth Growth Program &bull; Confidential</span>
+</footer>
+
+<script>
+  function showTab(id, btn) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+  function setActive(link) {
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    link.classList.add('active');
+  }
+  // Highlight nav on scroll
+  const sections = ['hero','outcomes','milestones','programs','icp','integrations'];
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 80) current = id;
+    });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+</script>
+</body>
+</html>
